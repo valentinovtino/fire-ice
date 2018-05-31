@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { fakeAction } from '../../actions';
 import { sendToStore } from '../../actions/index';
 import { fetchHouses } from '../../apiCalls/apiCalls';
-import Container from '../container/Container'
+import Container from '../container/Container';
 
 class App extends Component {
 
@@ -14,13 +14,14 @@ class App extends Component {
   async componentDidMount() {
     const houses = await fetchHouses();
     await this.props.sendToStore(houses);
-
+    console.log(houses)
   };
   
   render() {
     
-   console.log(this.props)
-    
+   const { houses } = this.props
+    console.log(houses)
+
     return (
       <div className='App'>
         <div className='App-header'>
@@ -33,11 +34,11 @@ class App extends Component {
         </div>
         <div className='Display-info'>
 
-          {/* { houses.length > 0 ?
+          { houses.length > 0 ?
             <Container/> :
             <div>
             </div>
-          } */}
+          }
         </div>
       </div>
     );
