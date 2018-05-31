@@ -13,15 +13,13 @@ class App extends Component {
 
   async componentDidMount() {
     const houses = await fetchHouses();
-    
     await this.props.sendToStore(houses);
 
-    console.log(this.props.sendToStore(houses))
   };
-
+  
   render() {
-
-    const { houses } = this.props 
+    
+   console.log(this.props)
     
     return (
       <div className='App'>
@@ -34,7 +32,12 @@ class App extends Component {
           }}> FAKE ACTION</button>
         </div>
         <div className='Display-info'>
-          { <Container/> }
+
+          {/* { houses.length > 0 ?
+            <Container/> :
+            <div>
+            </div>
+          } */}
         </div>
       </div>
     );
@@ -51,12 +54,12 @@ App.propTypes = {
 //   () => dispatch(fakeAction())
 // });
 
-const mapStateToProps = (state) => ({
-  houses: this.state
-})
+export const mapStateToProps = (state) => ({
+  houses: state.houses
+});
 
-const mapDispatchToProps = (dispatch) => ({
+export const mapDispatchToProps = (dispatch) => ({
   sendToStore: (houses) => dispatch(sendToStore(houses))
 });
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

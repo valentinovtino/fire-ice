@@ -2,13 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Card from '../Card/Card';
 
-export const Container = ({houses}) => {
-    console.log(houses)
+const Container = (props) => {
+console.log(props)
 
-    
-  const showHouses = houses.map((house) => {
-    return <Card house={house} />;
+//    const {houses} = this.props;
 
+  const showHouses = props.houses.map((house, index) => {
+    return <Card house={house} key={index}/>;
   });
 
   return (
@@ -16,11 +16,10 @@ export const Container = ({houses}) => {
       {showHouses}
     </div>
   );
-
 };
 
-export const mapStateToProps = (state) => {
-  houses: state.houses;
-};
+const mapStateToProps = (state) => ({
+  houses: state.houses
+});
 
 export default connect(mapStateToProps)(Container);
