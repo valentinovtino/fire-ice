@@ -20,6 +20,9 @@ class App extends Component {
   };
 
   render() {
+
+    const { houses } = this.props 
+    
     return (
       <div className='App'>
         <div className='App-header'>
@@ -31,7 +34,7 @@ class App extends Component {
           }}> FAKE ACTION</button>
         </div>
         <div className='Display-info'>
-          {/* </Container /> */}
+          { <Container/> }
         </div>
       </div>
     );
