@@ -15,7 +15,7 @@ class Card extends Component {
     this.setState({ clicked: !this.state.clicked});
     const swornMems = await getSwornMems(house);
 
-    //**Below is what I was thinking of implementing to add the correct swornMembers**/
+    //**Below is what I was thinking of implementing to add the correct swornMembers!**/
     // const combine = await this.props.houses.map((house, index) => {
     //   house.swornMems = swornMems[index];
     //   return combine;
