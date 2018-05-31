@@ -1,42 +1,36 @@
 import React, {Component} from 'react';
 import { getSwornMems } from '../../apiCalls/apiCalls';
+import { connect } from 'react-redux';
 
 class Card extends Component {
   constructor() {
     super();
     this.state = {
       clicked: false
-    }
+    };
   }
 
   handleClick = async () => {
     const { house } = this.props;
-    this.setState({ clicked: !this.state.clicked})
-
-    // console.log(house)
+    this.setState({ clicked: !this.state.clicked});
     const swornMems = await getSwornMems(house);
-    const combine = await this.props.houses.map((house, index) => {
-      house.swornMems = swornMems[index];
-      return house;
-    });
 
+    //**Below is what I was thinking of implementing to add the correct swornMembers**/
+    // const combine = await this.props.houses.map((house, index) => {
+    //   house.swornMems = swornMems[index];
+    //   return combine;
+    // });
   }
   
   render() {
     const { house } = this.props;
-
     const members = house.swornMembers.map(member => {
       return <li>{member.name}</li>
-    })
-
+    });
     const displayMembers = this.state.clicked ? members : ''
 
-
-
     return (
-      <div
-
-      >
+      <div>
 
         { house &&
       <div>
@@ -57,4 +51,8 @@ class Card extends Component {
 
 }
 
-export default Card;
+export const mapStateToProps = (state) => ({
+  houses: state.houses
+});
+
+export default connect(mapStateToProps)(Card);
