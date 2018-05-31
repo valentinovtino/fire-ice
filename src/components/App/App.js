@@ -5,9 +5,16 @@ import './App.css';
 import { connect } from 'react-redux';
 import { fakeAction } from '../../actions';
 import { sendToStore } from '../../actions/index';
+import { fetchHouses } from '../../apiCalls/apiCalls';
 
 class App extends Component {
 
+  async componentDidMount() {
+    const houses = await fetchHouses();
+    await this.props.sendToStore(houses);
+    
+    console.log(this.props.sendToStore(houses))
+  };
 
   render() {
     return (
@@ -36,7 +43,6 @@ App.propTypes = {
 // const mapDispatchToProps = dispatch => ({ fakeAction:
 //   () => dispatch(fakeAction())
 // });
-
 
 
 const mapDispatchToProps = (dispatch) => ({
