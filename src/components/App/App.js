@@ -13,14 +13,14 @@ class App extends Component {
 
   async componentDidMount() {
     const houses = await fetchHouses();
+    
     await this.props.sendToStore(houses);
-    console.log(houses)
   };
   
   render() {
     
    const { houses } = this.props
-    console.log(houses)
+    
 
     return (
       <div className='App'>

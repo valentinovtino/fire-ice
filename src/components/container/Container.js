@@ -3,9 +3,6 @@ import { connect } from 'react-redux';
 import Card from '../Card/Card';
 
 const Container = (props) => {
-console.log(props)
-
-//    const {houses} = this.props;
 
   const showHouses = props.houses.map((house, index) => {
     return <Card house={house} key={index}/>;
