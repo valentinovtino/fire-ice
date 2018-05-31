@@ -6,17 +6,22 @@ import { connect } from 'react-redux';
 import { fakeAction } from '../../actions';
 import { sendToStore } from '../../actions/index';
 import { fetchHouses } from '../../apiCalls/apiCalls';
+import Container from '../container/Container';
 
 class App extends Component {
 
+
   async componentDidMount() {
     const houses = await fetchHouses();
-    await this.props.sendToStore(houses);
     
-    console.log(this.props.sendToStore(houses))
+    await this.props.sendToStore(houses);
   };
-
+  
   render() {
+    
+   const { houses } = this.props
+    
+
     return (
       <div className='App'>
         <div className='App-header'>
@@ -28,6 +33,12 @@ class App extends Component {
           }}> FAKE ACTION</button>
         </div>
         <div className='Display-info'>
+
+          { houses.length > 0 ?
+            <Container/> :
+            <div>
+            </div>
+          }
         </div>
       </div>
     );
@@ -44,9 +55,12 @@ App.propTypes = {
 //   () => dispatch(fakeAction())
 // });
 
+export const mapStateToProps = (state) => ({
+  houses: state.houses
+});
 
-const mapDispatchToProps = (dispatch) => ({
+export const mapDispatchToProps = (dispatch) => ({
   sendToStore: (houses) => dispatch(sendToStore(houses))
 });
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
